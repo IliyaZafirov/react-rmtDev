@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import Background from "./Background";
 import Container from "./Container";
 import Footer from "./Footer";
-import Header from "./Header";
+import Header, { HeaderTop } from "./Header";
+import BookmarksButton from "./BookmarksButton";
+import Logo from "./Logo";
+import SearchForm from "./SearchForm";
 
 function App() {
   const [jobItems, setJobItems] = useState([]);
@@ -29,7 +32,14 @@ function App() {
     <>
       <Background />
 
-      <Header searchText={searchText} setSearchText={setSearchText} />
+      <Header>
+        <HeaderTop>
+          <Logo />
+          <BookmarksButton />
+        </HeaderTop>
+
+        <SearchForm searchText={searchText} setSearchText={setSearchText} />
+      </Header>
 
       <Container jobItems={jobItems} />
 
