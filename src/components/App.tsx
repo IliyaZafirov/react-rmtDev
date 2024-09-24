@@ -6,6 +6,12 @@ import Header, { HeaderTop } from "./Header";
 import BookmarksButton from "./BookmarksButton";
 import Logo from "./Logo";
 import SearchForm from "./SearchForm";
+import Sidebar, { SidebarTop } from "./Sidebar";
+import JobItemContent from "./JobItemContent";
+import JobList from "./JobList";
+import PaginationControls from "./PaginationControls";
+import ResultsCount from "./ResultsCount";
+import SortingControls from "./SortingControls";
 
 function App() {
   const [jobItems, setJobItems] = useState([]);
@@ -41,7 +47,19 @@ function App() {
         <SearchForm searchText={searchText} setSearchText={setSearchText} />
       </Header>
 
-      <Container jobItems={jobItems} />
+      <Container>
+        <Sidebar>
+          <SidebarTop>
+            <ResultsCount />
+            <SortingControls />
+          </SidebarTop>
+
+          <JobList jobItems={jobItems} />
+
+          <PaginationControls />
+        </Sidebar>
+        <JobItemContent />
+      </Container>
 
       <Footer />
     </>
