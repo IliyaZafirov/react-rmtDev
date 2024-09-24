@@ -4,7 +4,7 @@ export function JobList({ jobItems }) {
   return (
     <ul className="job-list">
       {jobItems.map((item) => (
-        <JobListItem item={item} />
+        <JobListItem key={item.id} item={item} />
       ))}
     </ul>
   );
