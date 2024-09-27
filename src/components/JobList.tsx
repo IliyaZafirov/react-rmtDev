@@ -5,9 +5,9 @@ import Spinner from "./Spinner";
 type JobListProps = {
   jobItems: JobItem[];
   isLoading: boolean;
-}
+};
 
-export function JobList({ jobItems, isLoading }: JobListProps) {
+export default function JobList({ jobItems, isLoading }: JobListProps) {
   return (
     <ul className="job-list">
       {isLoading && <Spinner />}
@@ -17,5 +17,3 @@ export function JobList({ jobItems, isLoading }: JobListProps) {
     </ul>
   );
 }
-
-export default JobList;
