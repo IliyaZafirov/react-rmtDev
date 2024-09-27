@@ -95,7 +95,7 @@ function LoadingJobContent() {
   return (
     <section className="job-details">
       <div>
-        <Spinner />;
+        <Spinner />
       </div>
     </section>
   );
