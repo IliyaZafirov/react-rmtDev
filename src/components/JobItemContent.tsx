@@ -6,8 +6,8 @@ export default function JobItemContent() {
   const activeId = useActiveId();
   const [jobItem, isLoading] = useJobItem(activeId);
 
-  if (isLoading) return <LoadingJobContent />;
   if (!jobItem) return <EmptyJobContent />;
+  if (isLoading) return <LoadingJobContent />;
 
   return (
     <section className="job-details">
