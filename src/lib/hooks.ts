@@ -41,12 +41,11 @@ const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   }
   const data = await response.json();
 
-  console.log(data);
   return data;
 };
 
 export function useJobItem(id: number | null) {
-  const { data, isLoading: isInitialLoading } = useQuery(
+  const { data, isInitialLoading } = useQuery(
     ["job-item", id],
     () => (id ? fetchJobItem(id) : null),
     {
@@ -68,11 +67,10 @@ export function useJobItem(id: number | null) {
 export function useJobItems(searchText: string) {
   const [jobItems, setJobItems] = useState<JobItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const totalNumberOfResults = jobItems.length;
-  const jobItemsSliced = jobItems.slice(0, 7);
 
   useEffect(() => {
     if (!searchText) return;
+
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -88,7 +86,7 @@ export function useJobItems(searchText: string) {
     fetchData();
   }, [searchText]);
 
-  return [jobItemsSliced, isLoading, totalNumberOfResults] as const;
+  return [jobItems, isLoading] as const;
 }
 
 export function useDebounce<T>(value: T, delay = 250): T {
