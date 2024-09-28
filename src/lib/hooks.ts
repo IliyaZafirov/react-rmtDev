@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { JobItem, JobItemExpanded } from "./types";
 import { BASE_API_URL } from "./constants";
 import { useQuery } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 // export function useJobItem(id: number | null) {
 //   const [jobItem, setJobItem] = useState<JobItemExpanded | null>(null);
@@ -35,12 +36,13 @@ type JobItemApiResponse = {
 
 const fetchJobItem = async (id: number): Promise<JobItemApiResponse> => {
   const response = await fetch(`${BASE_API_URL}/${id}`);
+  // 4xx or 5xx
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.description);
   }
-  const data = await response.json();
 
+  const data = await response.json();
   return data;
 };
 
@@ -97,6 +99,12 @@ const fetchJobItems = async (
   searchText: string
 ): Promise<JobItemsApiResponse> => {
   const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
+  // 4xx or 5xx
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.description);
+  }
+
   const data = await response.json();
   return data;
 };
@@ -110,8 +118,8 @@ export function useJobItems(searchText: string) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: !!searchText,
-      onError: (err) => {
-        console.log(err);
+      onError: (error) => {
+        toast.error(error.message);
       },
     }
   );
