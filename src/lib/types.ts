@@ -18,5 +18,6 @@ export type JobItemExpanded = JobItem & {
   companyURL: string;
 };
 
-export type SortBy = "relevant" | "recent";
+export type PageDirection = "next" | "previous";
 
+export type SortBy = "relevant" | "recent";
