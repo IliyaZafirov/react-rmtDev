@@ -1,4 +1,3 @@
-import { act } from "react-dom/test-utils";
 import { useActiveIdContext } from "../lib/hooks";
 import { JobItem } from "../lib/types";
 import JobListItem from "./JobListItem";
@@ -10,7 +9,7 @@ type JobListProps = {
 };
 
 export default function JobList({ jobItems, isLoading }: JobListProps) {
-  const { activeId } = useActiveIdContext();
+  const activeId = useActiveIdContext();
 
   return (
     <ul className="job-list">
