@@ -20,7 +20,7 @@ export default function JobList({ jobItems, isLoading }: JobListProps) {
           <JobListItem
             key={item.id}
             item={item}
-            isActive={item.id === activeId}
+            isActive={item.id === +activeId}
           />
         ))}
     </ul>
