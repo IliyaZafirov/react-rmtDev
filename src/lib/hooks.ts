@@ -72,7 +72,7 @@ export function useJobItems(ids: number[]) {
       refetchOnWindowFocus: false,
       retry: false,
       enabled: !!ids,
-      oonError: (err) => console.log(err),
+      oonError: (err: Error) => console.log(err),
     })),
   });
 
@@ -80,7 +80,7 @@ export function useJobItems(ids: number[]) {
     .map((result) => result.data?.jobItem)
     // .filter((jobItem) => jobItem !== undefined);
     // .filter((jobItem) => !!jobItem);
-    .filter((jobItem) => Boolean(jobItem)) as JobItemExpanded[]
+    .filter((jobItem) => Boolean(jobItem)) as JobItemExpanded[];
   const isLoading = results.some((result) => result.isLoading);
 
   return {
@@ -208,6 +208,27 @@ export function useLocalStorage<T>(
   }, [value, key]);
 
   return [value, setValue];
+}
+
+export function useOnClickOutside(
+  refs: React.RefObject<HTMLElement>[],
+  callback: () => void
+) {
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (
+        refs.every((ref) => !ref.current?.contains(e.target as Node))
+      ) {
+        callback();
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, [refs, callback]);
 }
 
 export function useBookmarksContext() {
