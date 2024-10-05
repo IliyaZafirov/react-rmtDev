@@ -56,7 +56,7 @@ export default function JobItemsContextProvider({
   // event handlers / actions
   const handleChangePage = useCallback((direction: PageDirection) => {
     if (direction === "next") {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage((prev) => prev + 1);
     } else if (direction === "previous") {
       setCurrentPage((prev) => prev - 1);
     }
